@@ -1,5 +1,6 @@
 const express = require('express');
 const docter = express();
+const env=require(env);
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -16,7 +17,7 @@ docter.route('/signin').post(async (req, res) => {
     const { email, password } = req.body;
     const docter = await docterModel.findOne({ email });
     if (docter && await bcrypt.compare(password, docter.password)) {
-        const token = jwt.sign({ id: docter._id, email: docter.email }, 'secret_key', { expiresIn: '1h' });
+        const token = jwt.sign({ id: docter._id, email: docter.email }, 'env', { expiresIn: '1h' });
         res.status(200).json({ message: 'Docter signed in successfully', token });
     } else {
         res.status(401).send('Invalid email or password');

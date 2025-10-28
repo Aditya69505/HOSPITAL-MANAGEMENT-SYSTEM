@@ -24,7 +24,7 @@ mongoose.connect('mongodb://localhost:27017/hms', {
 app.use('/doctors', docterRoute);
 app.use('/patients', patientRoute);
 
-app.get('/', (req, res) => {
+app.get('/hii', (req, res) => {
     res.send('Hello World!');
 });
 
